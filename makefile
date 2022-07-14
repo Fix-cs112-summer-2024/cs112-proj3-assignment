@@ -1,8 +1,7 @@
 # assignment name (generate executable with this name)
-TARGET = proj3
 TEST_TARGET = tester
 # .cpp files that do not contain a main() function.
-SOURCES = Student.cpp
+SOURCES = HighScores.cpp
 
 CPP       = g++ --std=c++11 -c
 CPPFLAGS   = -Wall -I. -g
@@ -17,19 +16,15 @@ rm       = rm -f
 
 all: $(TEST_TARGET)
 
-$(TARGET): obj main.o
-	$(LINKER) $(TARGET) $(LFLAGS) $(OBJECTS) main.o
-	@echo "Linking complete!"
-
-$(TEST_TARGET): obj tests.o
+$(TEST_TARGET): obj
 	$(LINKER) $(TEST_TARGET) $(LFLAGS) $(OBJECTS) tests.o
 	@echo "Linking complete!"
 
-obj: $(SOURCES) $(INCLUDES) main.cpp tests.cpp
-	$(CPP) $(CPPFLAGS) $(SOURCES) main.cpp tests.cpp
+obj: $(SOURCES) $(INCLUDES) tests.cpp
+	$(CPP) $(CPPFLAGS) $(SOURCES) tests.cpp
 	@echo "Compilation complete!"
 
 clean:
-	$(rm) $(TARGET) $(TEST_TARGET) $(OBJECTS) main.o tests.o
+	$(rm) $(TARGET) $(TEST_TARGET) $(OBJECTS) tests.o
 	@echo "Cleanup complete!"
 
